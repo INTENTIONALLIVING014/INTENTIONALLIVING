@@ -1542,6 +1542,21 @@
                 opacity: 1;
             }
         }
+        
+        /* NEW: Navigation section styling */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 5rem 5%;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        #home {
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -1561,20 +1576,24 @@
             </ul>
         </nav>
     </header>
-    <section id="home" class="hero">
+    
+    <!-- Home Section -->
+    <section id="home" class="hero page-section active">
         <div class="hero-content">
             <h1>DESIGN YOUR LIFE WITH PURPOSE</h1>
             <p>Welcome to INTENTIONAL LIVING University, where we transform how you live through purposeful design. Our unique approach integrates physical spaces, technology, and earth sciences to create environments that nurture growth and well-being.</p>
             <div class="hero-buttons">
-                <a href="#schools" class="btn">Discover Our Schools</a>
-                <a href="#contact" class="btn" style="border-color: var(--bio-lum); color: var(--bio-lum);">Visit Campus</a>
+                <a href="#" class="nav-link btn" data-target="schools">Discover Our Schools</a>
+                <a href="#" class="nav-link btn" data-target="campus" style="border-color: var(--bio-lum); color: var(--bio-lum);">Visit Campus</a>
                 <a href="#" class="btn" id="enrollBtn">Enroll Now</a>
             </div>
         </div>
         <div class="holographic-element"></div>
         <div class="holographic-element"></div>
     </section>
-    <section id="schools">
+    
+    <!-- Schools Section -->
+    <section id="schools" class="page-section">
         <h2 class="section-title">SCHOOLS OF INTENTIONAL LIVING</h2>
         <div class="programs-container">
             <div class="program-card">
@@ -1633,7 +1652,9 @@
             </div>
         </div>
     </section>
-    <section id="campus">
+    
+    <!-- Campus Section -->
+    <section id="campus" class="page-section">
         <h2 class="section-title">OUR INTENTIONAL CAMPUS</h2>
         <div class="campus-showcase">
             <div class="campus-description">
@@ -1693,7 +1714,9 @@
             </div>
         </div>
     </section>
-    <section id="contact">
+    
+    <!-- Contact Section -->
+    <section id="contact" class="page-section">
         <h2 class="section-title">CONNECT WITH US</h2>
         <div class="contact-section">
             <div class="contact-info">
@@ -1757,8 +1780,9 @@
             </div>
         </div>
     </section>
+    
     <!-- Classroom Section -->
-    <section id="classroom">
+    <section id="classroom" class="page-section">
         <h2 class="section-title">VIRTUAL CLASSROOM</h2>
         
         <div class="room-setup" id="roomSetup">
@@ -2100,50 +2124,47 @@
         createBubbles();
         animateBubbles();
         
-        // Navigation
+        // Navigation - Show only the clicked section
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // Remove active class from all links
                 document.querySelectorAll('.nav-link').forEach(el => {
                     el.classList.remove('active');
                 });
+                
+                // Add active class to clicked link
                 this.classList.add('active');
+                
+                // Get target section ID
                 const targetId = this.getAttribute('data-target');
-                const targetSection = document.getElementById(targetId);
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
                 });
+                
+                // Show the target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+                
+                // Close mobile menu if open
                 document.querySelector('nav').classList.remove('active');
             });
         });
         
+        // Mobile menu toggle
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('nav').classList.toggle('active');
         });
         
+        // Form submission
         document.getElementById('messageForm').addEventListener('submit', function(e) {
             const name = document.getElementById('name').value;
             alert(`Thank you ${name}! Your message has been sent to intentionalliving014@gmail.com. We'll respond within 24 hours.`);
-        });
-        
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-target') === current) {
-                    link.classList.add('active');
-                }
-            });
         });
         
         // Payment integration
@@ -2270,7 +2291,11 @@
         // Access classroom after payment
         accessClassroomBtn.addEventListener('click', () => {
             paymentModal.classList.remove('active');
-            document.getElementById('classroom').scrollIntoView({ behavior: 'smooth' });
+            // Show classroom section
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.querySelector('[data-target="classroom"]').classList.add('active');
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('classroom').classList.add('active');
         });
         
         // Back to enrollment form
