@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>INTENTIONAL LIVING | Password Protected Schools</title>
+    <title>INTENTIONAL LIVING | University</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
         }
 
         :root {
@@ -21,416 +21,151 @@
             --neon-coral: #ff00ea;
             --bio-lum: #7dffaf;
             --text-light: #e6f7ff;
-            --hologram-teal: rgba(0, 247, 255, 0.15);
+            --android-surface: #121212;
+            --android-primary: #00f7ff;
+            --android-secondary: #7dffaf;
+            --android-card: #1e1e1e;
         }
 
         body {
-            background: radial-gradient(ellipse at bottom, var(--deep-space) 0%, var(--ocean-depths) 100%);
+            background: var(--android-surface);
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
             line-height: 1.6;
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 80px;
         }
 
-        /* Header */
-        header {
+        /* Android Status Bar */
+        .status-bar {
+            height: 24px;
+            background: rgba(0, 12, 24, 0.9);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0 16px;
+            font-size: 12px;
+            color: var(--aqua-glow);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+        }
+
+        .status-left, .status-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            z-index: 999;
             background: rgba(0, 18, 32, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
-            height: 60px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--aqua-glow), var(--bio-lum));
+            background: linear-gradient(45deg, var(--android-primary), var(--android-secondary));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 70%;
+            font-family: 'Roboto', sans-serif;
         }
 
-        .logo::after {
-            content: "∞";
-            position: absolute;
-            top: -5px;
-            right: -15px;
-            font-size: 1.2rem;
-            color: var(--aqua-glow);
-            opacity: 0.7;
-        }
-
-        .logo i {
-            margin-right: 6px;
-            font-size: 1.4rem;
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--android-primary);
             animation: pulse 3s infinite;
         }
 
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            padding: 80px 5% 80px;
-            position: relative;
-            min-height: calc(100vh - 120px);
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Section (PC only) */
-        .hero-pc {
-            display: none;
-            min-height: 100vh;
-            align-items: center;
-            padding: 0 10%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            width: 100%;
-            z-index: 10;
-            text-align: center;
-        }
-
-        .hero-pc h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--text-light), var(--aqua-glow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
-        }
-
-        .hero-pc p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 2.2rem;
-            background: transparent;
-            color: var(--aqua-glow);
-            border: 2px solid var(--aqua-glow);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            font-size: 1rem;
-            margin: 0.5rem;
-        }
-
-        .btn:hover {
-            background: rgba(0, 247, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 247, 255, 0.5);
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Home Content */
-        .mobile-home {
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .mobile-home h1 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--aqua-glow), var(--bio-lum));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .mobile-home p {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Sections */
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--aqua-glow), transparent);
-        }
-
-        /* Programs Section */
-        .programs-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .program-card {
-            background: rgba(0, 43, 77, 0.4);
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-        }
-
-        .program-card:active {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 247, 255, 0.3);
-        }
-
-        .program-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--aqua-glow), var(--bio-lum));
-        }
-
-        .program-content {
-            padding: 1.5rem;
-        }
-
-        .program-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--aqua-glow);
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-
-        .program-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--bio-lum);
-        }
-
-        .program-card p {
-            opacity: 0.8;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        /* Password Modal */
-        .password-modal {
-            display: none;
+        /* Floating Action Button */
+        .fab {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 18, 32, 0.95);
-            z-index: 2000;
+            bottom: 90px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--android-primary), var(--android-secondary));
+            display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            background: rgba(0, 43, 77, 0.9);
-            border-radius: 16px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 400px;
-            border: 1px solid var(--aqua-glow);
-            box-shadow: 0 0 30px rgba(0, 247, 255, 0.4);
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-header i {
-            font-size: 3rem;
-            color: var(--aqua-glow);
-            margin-bottom: 1rem;
-            animation: pulse 2s infinite;
-        }
-
-        .modal-header h3 {
+            color: var(--android-surface);
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--bio-lum);
-        }
-
-        .modal-header p {
-            opacity: 0.8;
-        }
-
-        .password-input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(0, 18, 32, 0.6);
-            border: 1px solid rgba(0, 247, 255, 0.3);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-size: 1rem;
-            margin: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .password-input:focus {
-            outline: none;
-            border-color: var(--aqua-glow);
-            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            z-index: 998;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .modal-btn.submit {
-            background: linear-gradient(45deg, var(--aqua-glow), var(--bio-lum));
-            color: var(--deep-space);
+        .fab:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .modal-btn.cancel {
-            background: transparent;
-            color: var(--neon-coral);
-            border: 1px solid var(--neon-coral);
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-btn.submit:hover {
-            background: linear-gradient(45deg, #00e1ff, #6dffa0);
-        }
-
-        .modal-btn.cancel:hover {
-            background: rgba(255, 0, 234, 0.1);
-        }
-
-        /* Access Granted Section */
-        .access-granted {
+        /* Contact Menu */
+        .contact-menu {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            background: var(--android-card);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            z-index: 997;
             display: none;
-            text-align: center;
-            padding: 3rem 1rem;
-            background: rgba(0, 43, 77, 0.4);
-            border-radius: 16px;
-            margin-top: 2rem;
-            border: 1px solid var(--bio-lum);
-            box-shadow: 0 0 30px rgba(125, 255, 175, 0.2);
-        }
-
-        .access-granted i {
-            font-size: 4rem;
-            color: var(--bio-lum);
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        .access-granted h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--bio-lum);
-        }
-
-        /* Campus Section */
-        .campus-showcase {
-            display: flex;
             flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 12px;
+            width: 260px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
         }
 
-        .campus-description h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--aqua-glow);
-        }
-
-        .campus-description p {
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .campus-features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .feature {
+        .contact-menu.show {
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+            animation: slideUp 0.3s ease-out;
         }
 
-        .feature-icon {
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:active {
+            background: rgba(0, 247, 255, 0.15);
+            transform: translateY(2px);
+        }
+
+        .contact-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -438,257 +173,80 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            color: var(--aqua-glow);
-            box-shadow: 0 0 8px rgba(0, 247, 255, 0.3);
-            flex-shrink: 0;
+            margin-right: 16px;
+            font-size: 1.2rem;
+            color: var(--android-primary);
         }
 
-        .hologram-display {
-            height: 280px;
-            background: rgba(0, 247, 255, 0.05);
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 247, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .contact-text {
+            flex: 1;
         }
 
-        .hologram-content {
-            text-align: center;
-            padding: 1.5rem;
-            z-index: 2;
-        }
-
-        .hologram-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--aqua-glow);
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-
-        .hologram-content p {
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-info, .contact-form {
-            padding: 1.5rem;
-            background: rgba(0, 43, 77, 0.4);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 247, 255, 0.2);
-        }
-
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--aqua-glow);
-        }
-
-        .contact-detail {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid rgba(0, 247, 255, 0.1);
-        }
-
-        .contact-detail i {
-            font-size: 1.3rem;
-            color: var(--aqua-glow);
-            min-width: 36px;
-        }
-
-        .contact-detail div h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.2rem;
-            color: var(--bio-lum);
-        }
-
-        .contact-detail div p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--aqua-glow);
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(0, 18, 32, 0.5);
-            border: 1px solid rgba(0, 247, 255, 0.3);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--aqua-glow);
-            box-shadow: 0 0 12px rgba(0, 247, 255, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 18, 32, 0.9);
-            padding: 2rem 5% 1.5rem;
-            border-top: 1px solid rgba(0, 247, 255, 0.2);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column {
-            min-width: 0;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-            color: var(--aqua-glow);
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--aqua-glow);
-        }
-
-        .footer-column p {
-            margin-bottom: 0.7rem;
-            opacity: 0.8;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(0, 247, 255, 0.1);
-            color: var(--aqua-glow);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 8px rgba(0, 247, 255, 0.2);
+        .contact-text h3 {
             font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--text-light);
         }
 
-        .social-links a:active {
-            background: var(--aqua-glow);
-            color: var(--deep-space);
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 247, 255, 0.1);
-            opacity: 0.6;
+        .contact-text p {
             font-size: 0.85rem;
+            opacity: 0.7;
         }
 
-        /* Zambia Flag */
-        .zambia-flag {
-            width: 30px;
-            height: 22px;
-            display: inline-block;
-            margin-left: 8px;
-            position: relative;
-            vertical-align: middle;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        
-        .zambia-flag div {
-            position: absolute;
-            width: 100%;
-            height: 33.33%;
-        }
-        
-        .zambia-flag .green { background: #198A00; top: 0; }
-        .zambia-flag .red { background: #CE1026; top: 33.33%; }
-        .zambia-flag .black { background: #000; top: 66.66%; }
-        .zambia-flag .orange {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 33.33%;
-            height: 100%;
-            background: #FF8C00;
-            clip-path: polygon(0 0, 100% 50%, 0 100%);
-        }
-        
-        .zambia-flag .orange::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            height: 60%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13.5v6l5.25 3.15.75-1.23-4.5-2.67V6.5z'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
+        /* Content Area */
+        .content {
+            padding: 100px 20px 20px;
+            max-width: 100%;
+            overflow-y: auto;
         }
 
-        /* Bottom Navigation for Android */
-        .bottom-nav {
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .card {
+            background: var(--android-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--android-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: var(--android-secondary);
+        }
+
+        /* Android Bottom Navigation */
+        .nav-container {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-around;
+            width: 100%;
             background: rgba(0, 18, 32, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid rgba(0, 247, 255, 0.2);
-            z-index: 1000;
-            height: 60px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 999;
         }
 
         .nav-item {
@@ -696,25 +254,133 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.8rem;
-            flex: 1;
+            padding: 8px 12px;
+            border-radius: 16px;
             transition: all 0.3s ease;
-        }
-
-        .nav-item i {
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
+            min-width: 64px;
+            text-decoration: none;
+            color: rgba(230, 247, 255, 0.7);
         }
 
         .nav-item.active {
-            color: var(--aqua-glow);
+            background: rgba(0, 247, 255, 0.15);
+            color: var(--android-primary);
+            transform: translateY(-8px);
         }
 
-        .nav-item:active {
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Program Grid */
+        .program-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .program-card {
             background: rgba(0, 247, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .program-card:active {
+            transform: scale(0.98);
+            background: rgba(0, 247, 255, 0.2);
+        }
+
+        .program-icon {
+            font-size: 2.5rem;
+            color: var(--android-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* Campus Image */
+        .campus-image {
+            height: 180px;
+            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1), rgba(125, 255, 175, 0.1));
+            border-radius: 16px;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .campus-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#001e32"/><path d="M0 50 Q 25 30, 50 50 T 100 50" stroke="#00f7ff" stroke-width="0.5" fill="none"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+
+        .campus-image i {
+            font-size: 5rem;
+            color: var(--android-secondary);
+            opacity: 0.3;
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--android-primary);
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--android-primary), var(--android-secondary));
+            color: var(--android-surface);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 8px;
+            box-shadow: 0 4px 10px rgba(0, 247, 255, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 6px rgba(0, 247, 255, 0.2);
         }
 
         /* Animations */
@@ -724,7 +390,7 @@
                 opacity: 1;
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.1);
                 opacity: 0.7;
             }
             100% {
@@ -733,512 +399,383 @@
             }
         }
 
-        /* Responsive Design */
-        @media (min-width: 480px) {
-            .programs-container {
-                grid-template-columns: 1fr 1fr;
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
             }
-            
-            .campus-features {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .logo {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .campus-showcase, .contact-section {
-                flex-direction: row;
-            }
-            
-            .footer-content {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .footer-column {
-                flex: 1;
-                min-width: 250px;
-            }
-            
-            .hero-pc {
-                display: flex;
-            }
-            
-            .mobile-home {
-                display: none;
+            to {
+                transform: translateY(0);
+                opacity: 1;
             }
         }
 
-        @media (min-width: 992px) {
-            .programs-container {
-                grid-template-columns: repeat(3, 1fr);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
             }
-            
-            .hero-pc h1 {
-                font-size: 4rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Password Modal -->
-    <div class="password-modal" id="passwordModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <i class="fas fa-lock"></i>
-                <h3 id="modalSchoolName">School Access</h3>
-                <p>Please enter the password to access this school</p>
-            </div>
-            <input type="password" class="password-input" id="passwordInput" placeholder="Enter password..." autocomplete="off">
-            <p id="errorMessage" style="color: var(--neon-coral); height: 20px; margin: 5px 0;"></p>
-            <div class="modal-buttons">
-                <button class="modal-btn cancel" id="cancelBtn">Cancel</button>
-                <button class="modal-btn submit" id="submitBtn">Submit</button>
-            </div>
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>9:41</span>
         </div>
-    </div>
-
-    <!-- Hero Section (PC only) -->
-    <div class="hero-pc">
-        <div class="hero-content">
-            <h1>DESIGN YOUR LIFE WITH PURPOSE</h1>
-            <p>Welcome to INTENTIONAL LIVING University, where we transform how you live through purposeful design. Our unique approach integrates physical spaces, technology, and earth sciences to create environments that nurture growth and well-being.</p>
-            <div class="hero-buttons">
-                <a href="#schools" class="btn">Discover Our Schools</a>
-                <a href="#contact" class="btn" style="border-color: var(--bio-lum); color: var(--bio-lum);">Visit Campus</a>
-            </div>
+        <div class="status-right">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
         </div>
     </div>
 
     <!-- Header -->
-    <header>
-        <div class="logo"><i class="fas fa-water"></i>  INTENTIONAL LIVING</div>
-    </header>
-
-    <!-- Tab Content -->
-    <div id="home" class="tab-content active">
-        <div class="mobile-home">
-            <h1>DESIGN YOUR LIFE WITH PURPOSE</h1>
-            <p>Welcome to INTENTIONAL LIVING University. Our unique approach integrates design, technology, and earth sciences to create environments that nurture growth.</p>
-            <div class="hero-buttons">
-                <a href="#schools" class="btn">Explore Programs</a>
-            </div>
+    <div class="header">
+        <div class="logo-container">
+            <i class="fas fa-water logo-icon"></i>
+            <div class="logo">INTENTIONAL LIVING</div>
         </div>
     </div>
 
-    <div id="schools" class="tab-content">
-        <h2 class="section-title">SCHOOLS OF INTENTIONAL LIVING</h2>
-        <p style="text-align: center; margin-bottom: 1.5rem; opacity: 0.8;">
-            <i class="fas fa-lock" style="margin-right: 8px;"></i> Password required to access school details
-        </p>
+    <!-- Floating Action Button -->
+    <div class="fab" id="contactFab">
+        <i class="fas fa-ellipsis-v"></i>
+    </div>
+
+    <!-- Contact Menu -->
+    <div class="contact-menu" id="contactMenu">
+        <a href="#" class="contact-item">
+            <div class="contact-icon">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Facebook</h3>
+                <p>Connect with us on Facebook</p>
+            </div>
+        </a>
         
-        <div class="programs-container">
-            <div class="program-card" data-school="Interior Design" data-password="design123">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-couch"></i>
-                    </div>
-                    <h3>Interior Design</h3>
-                    <p>Create spaces that reflect purpose and personality. Learn to design environments that enhance well-being and functionality.</p>
-                </div>
+        <a href="tel:+260776145441" class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-phone"></i>
             </div>
-            
-            <div class="program-card" data-school="Exterior Design" data-password="landscape456">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-tree"></i>
-                    </div>
-                    <h3>Exterior Design</h3>
-                    <p>Shape the world around you. Master landscape architecture and sustainable outdoor environments.</p>
-                </div>
+            <div class="contact-text">
+                <h3>Call Us</h3>
+                <p>+260 776145441</p>
             </div>
-            
-            <div class="program-card" data-school="Programming" data-password="code789">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Programming</h3>
-                    <p>Craft digital solutions with purpose. Learn to build applications that enhance quality of life.</p>
-                </div>
-            </div>
-            
-            <div class="program-card" data-school="Graphics Design" data-password="graphics2023">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Graphics Design</h3>
-                    <p>Communicate visually with intention. Master visual storytelling and brand identity.</p>
-                </div>
-            </div>
-            
-            <div class="program-card" data-school="Software Engineering" data-password="engineerXYZ">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>Software Engineering</h3>
-                    <p>Build robust systems with purpose. Create software solutions that solve real-world problems.</p>
-                </div>
-            </div>
-            
-            <div class="program-card" data-school="Geomology" data-password="earthScience">
-                <div class="program-content">
-                    <div class="program-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>Geomology</h3>
-                    <p>Understand Earth's systems. Study how natural environments shape intentional living spaces.</p>
-                </div>
-            </div>
-        </div>
+        </a>
         
-        <!-- Access Granted Section -->
-        <div class="access-granted" id="accessGranted">
-            <i class="fas fa-unlock"></i>
-            <h3 id="grantedSchoolName">Access Granted!</h3>
-            <p>Welcome to the school. You now have access to all resources and materials.</p>
-            <p>Password: <strong id="displayedPassword">ace1</strong> (for demonstration purposes)</p>
-            <button class="btn" style="margin-top: 1.5rem;" onclick="document.getElementById('accessGranted').style.display = 'none'">
-                Close Access Panel
-            </button>
-        </div>
-    </div>
-
-    <div id="campus" class="tab-content">
-        <h2 class="section-title">OUR INTENTIONAL CAMPUS</h2>
-        <div class="campus-showcase">
-            <div class="campus-description">
-                <h3>A Living Laboratory for Purposeful Design</h3>
-                <p>Our campus in <strong>MANSA, Zambia</strong> is a model of intentional living, integrating sustainable architecture with natural environments. Located at Mwatakazembe Road, Plot number 367, every building and space is designed with purpose and mindfulness.</p>
-                <p>Experience how thoughtful design can transform living spaces and enhance quality of life through our innovative campus environment.</p>
-                
-                <div class="campus-features">
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div>
-                            <h4>Living Walls</h4>
-                            <p>Vertical gardens that purify air and create tranquility</p>
-                        </div>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div>
-                            <h4>Passive Solar Design</h4>
-                            <p>Buildings oriented to maximize natural light and heat</p>
-                        </div>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-recycle"></i>
-                        </div>
-                        <div>
-                            <h4>Closed-Loop Systems</h4>
-                            <p>Zero-waste water and energy systems throughout campus</p>
-                        </div>
-                    </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div>
-                            <h4>Mindful Spaces</h4>
-                            <p>Areas designed specifically for reflection and creativity</p>
-                        </div>
-                    </div>
-                </div>
+        <a href="mailto:ntentionalliving014@gmail.com" class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
             </div>
-            
-            <div class="hologram-display">
-                <div class="hologram-content">
-                    <h3>HOLO-CAMPUS PROJECTION</h3>
-                    <p>Experience our Zambian campus environment</p>
-                    <div style="margin-top: 20px;">
-                        <a href="#" class="btn" style="border-color: var(--bio-lum); color: var(--bio-lum);">Virtual Tour</a>
-                    </div>
-                </div>
+            <div class="contact-text">
+                <h3>Email</h3>
+                <p>ntentionalliving014@gmail.com</p>
             </div>
-        </div>
-    </div>
-
-    <div id="contact" class="tab-content">
-        <h2 class="section-title">CONNECT WITH US</h2>
-        <div class="contact-section">
-            <div class="contact-info">
-                <h3>Visit Our Campus</h3>
-                
-                <div class="contact-detail">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <h4>MANSA Campus, Zambia</h4>
-                        <p>Mwatakazembe Road, Low Density<br>Plot number 367</p>
-                        <div class="zambia-flag">
-                            <div class="green"></div>
-                            <div class="red"></div>
-                            <div class="black"></div>
-                            <div class="orange"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-detail">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <h4>Phone</h4>
-                        <p>+260 776145441<br>Mon-Fri: 9AM-5PM CAT</p>
-                    </div>
-                </div>
-                
-                <div class="contact-detail">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h4>Email</h4>
-                        <p>ntentionalliving014@gmail.com<br>admissions@intentionalliving.edu</p>
-                    </div>
-                </div>
-                
-                <div class="contact-detail">
-                    <i class="fab fa-facebook"></i>
-                    <div>
-                        <h4>Facebook</h4>
-                        <p><a href="https://www.facebook.com/profile.php?id=100093102997705" style="color: var(--bio-lum); text-decoration: none;">Visit our Facebook Page</a></p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-form">
-                <h3>Send a Message</h3>
-                <form id="messageForm" action="mailto:ntentionalliving014@gmail.com" method="post" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="yourname@email.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>INTENTIONAL LIVING</h3>
-                <p>Design your life with purpose. Creating meaningful environments since 2015.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=100093102997705"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Our Schools</h3>
-                <p>Interior Design</p>
-                <p>Exterior Design</p>
-                <p>Programming</p>
-                <p>Graphics Design</p>
-                <p>Software Engineering</p>
-                <p>Geomology</p>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <p><a href="#">Admissions</a></p>
-                <p><a href="#">Campus Virtual Tour</a></p>
-                <p><a href="#">Faculty Directory</a></p>
-                <p><a href="#">Student Resources</a></p>
-                <p><a href="#">Alumni Network</a></p>
-            </div>
-        </div>
+        </a>
         
-        <div class="copyright">
-            <p>&copy; 2023 INTENTIONAL LIVING University. All rights reserved.</p>
-            <p>Mwatakazembe Road, Plot 367, Mansa, Zambia</p>
-        </div>
-    </footer>
-
-    <!-- Bottom Navigation for Android -->
-    <div class="bottom-nav">
-        <a href="#home" class="nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="#schools" class="nav-item">
-            <i class="fas fa-graduation-cap"></i>
-            <span>Schools</span>
-        </a>
-        <a href="#campus" class="nav-item">
-            <i class="fas fa-university"></i>
-            <span>Campus</span>
-        </a>
-        <a href="#contact" class="nav-item">
-            <i class="fas fa-envelope"></i>
-            <span>Contact</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=Mwatakazembe+Road,Mansa,Zambia" class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Visit Campus</h3>
+                <p>Mwatakazembe Road, Plot 367, Mansa</p>
+            </div>
         </a>
     </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Home Section -->
+        <section id="home-section" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-water card-icon"></i>
+                    <h2>Welcome to INTENTIONAL LIVING</h2>
+                </div>
+                <p>Design your life with purpose at Zambia's premier institution for intentional design. Our unique approach integrates physical spaces, technology, and earth sciences to create environments that nurture growth and well-being.</p>
+                
+                <div class="campus-image">
+                    <i class="fas fa-university"></i>
+                </div>
+                
+                <p>Located in Mansa, Zambia, our campus serves as a living laboratory where students learn to design environments that enhance quality of life through purposeful design.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h2>Our Philosophy</h2>
+                </div>
+                <p>At INTENTIONAL LIVING University, we believe that every space should be designed with intention. Our programs teach students to create environments that:</p>
+                
+                <ul style="margin: 16px 0 16px 20px;">
+                    <li style="margin-bottom: 8px;">Enhance well-being and productivity</li>
+                    <li style="margin-bottom: 8px;">Integrate sustainable technologies</li>
+                    <li style="margin-bottom: 8px;">Harmonize with natural environments</li>
+                    <li>Inspire creativity and purpose</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Schools Section -->
+        <section id="schools-section" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-graduation-cap card-icon"></i>
+                    <h2>Our Academic Schools</h2>
+                </div>
+                <p>Discover our specialized schools designed to help you live intentionally in every aspect of life. Each program integrates purposeful design with practical application.</p>
+                
+                <div class="program-grid">
+                    <div class="program-card">
+                        <i class="fas fa-couch program-icon"></i>
+                        <h3>Interior Design</h3>
+                        <p>Create purposeful living spaces</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <i class="fas fa-tree program-icon"></i>
+                        <h3>Exterior Design</h3>
+                        <p>Design harmonious outdoor environments</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <i class="fas fa-laptop-code program-icon"></i>
+                        <h3>Programming</h3>
+                        <p>Code with purpose and intention</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <i class="fas fa-paint-brush program-icon"></i>
+                        <h3>Graphics Design</h3>
+                        <p>Communicate visually with intention</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <i class="fas fa-microchip program-icon"></i>
+                        <h3>Software Engineering</h3>
+                        <p>Build systems with purpose</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <i class="fas fa-globe program-icon"></i>
+                        <h3>Geomology</h3>
+                        <p>Understand Earth's systems</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Campus Section -->
+        <section id="campus-section" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-map-marker-alt card-icon"></i>
+                    <h2>Our Campus</h2>
+                </div>
+                <p>Located in Mansa, Zambia, our campus is a living laboratory of intentional design. Experience how thoughtful design can transform living spaces and enhance quality of life.</p>
+                
+                <div class="campus-image">
+                    <i class="fas fa-building"></i>
+                </div>
+                
+                <h3 style="margin: 16px 0 8px; color: var(--android-primary);">Campus Features</h3>
+                <ul style="margin-left: 20px;">
+                    <li style="margin-bottom: 8px;">Sustainable architecture integrated with nature</li>
+                    <li style="margin-bottom: 8px;">Advanced technology labs for design experimentation</li>
+                    <li style="margin-bottom: 8px;">Meditation and reflection gardens</li>
+                    <li>Collaborative learning spaces</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-directions card-icon"></i>
+                    <h2>Visit Us</h2>
+                </div>
+                <p><strong>Address:</strong><br>Mwatakazembe Road, Low Density<br>Plot number 367, Mansa, Zambia</p>
+                
+                <p style="margin-top: 12px;"><strong>Hours:</strong><br>Monday-Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM</p>
+                
+                <div style="margin-top: 20px; display: flex; gap: 12px;">
+                    <button style="flex: 1; padding: 12px; background: rgba(0, 247, 255, 0.1); border: 1px solid var(--android-primary); border-radius: 12px; color: var(--text-light);">
+                        <i class="fas fa-map-marker-alt"></i> Directions
+                    </button>
+                    <button style="flex: 1; padding: 12px; background: rgba(0, 247, 255, 0.1); border: 1px solid var(--android-primary); border-radius: 12px; color: var(--text-light);">
+                        <i class="fas fa-calendar"></i> Schedule Tour
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact-section" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-envelope card-icon"></i>
+                    <h2>Contact Us</h2>
+                </div>
+                <p>Have questions about our programs or want to schedule a campus tour? Reach out to us using the form below or through our contact information.</p>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="yourname@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="What is this regarding?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Type your message here..."></textarea>
+                </div>
+                
+                <button class="submit-btn">Send Message</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle card-icon"></i>
+                    <h2>Admissions Office</h2>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 247, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                        <i class="fas fa-phone" style="color: var(--android-primary);"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--text-light);">Phone</h3>
+                        <p>+260 776145441</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 247, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                        <i class="fas fa-envelope" style="color: var(--android-primary);"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--text-light);">Email</h3>
+                        <p>ntentionalliving014@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 247, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                        <i class="fab fa-facebook-f" style="color: var(--android-primary);"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--text-light);">Facebook</h3>
+                        <p>facebook.com/intentionalliving</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Android Bottom Navigation -->
+    <nav class="nav-container">
+        <a href="#" class="nav-item active" data-target="home-section">
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#" class="nav-item" data-target="schools-section">
+            <i class="fas fa-school nav-icon"></i>
+            <span class="nav-label">Schools</span>
+        </a>
+        <a href="#" class="nav-item" data-target="campus-section">
+            <i class="fas fa-map-marker-alt nav-icon"></i>
+            <span class="nav-label">Campus</span>
+        </a>
+        <a href="#" class="nav-item" data-target="contact-section">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span class="nav-label">Contact</span>
+        </a>
+    </nav>
 
     <script>
-        // Password protection functionality
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordInput = document.getElementById('passwordInput');
-        const modalSchoolName = document.getElementById('modalSchoolName');
-        const errorMessage = document.getElementById('errorMessage');
-        const submitBtn = document.getElementById('submitBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const accessGranted = document.getElementById('accessGranted');
-        const grantedSchoolName = document.getElementById('grantedSchoolName');
-        const displayedPassword = document.getElementById('displayedPassword');
-        
-        let currentSchool = '';
-        let currentPassword = '';
-        
-        // Show password modal for school access
-        document.querySelectorAll('.program-card').forEach(card => {
-            card.addEventListener('click', function() {
-                currentSchool = this.getAttribute('data-school');
-                currentPassword = this.getAttribute('data-password');
-                modalSchoolName.textContent = currentSchool;
-                passwordInput.value = '';
-                errorMessage.textContent = '';
-                passwordModal.style.display = 'flex';
-                passwordInput.focus();
-            });
-        });
-        
-        // Submit password
-        submitBtn.addEventListener('click', function() {
-            const enteredPassword = passwordInput.value.trim();
-            
-            if (enteredPassword === currentPassword) {
-                passwordModal.style.display = 'none';
-                grantedSchoolName.textContent = `Access Granted to ${currentSchool}`;
-                displayedPassword.textContent = currentPassword;
-                accessGranted.style.display = 'block';
-                
-                // Scroll to access granted section
-                accessGranted.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                errorMessage.textContent = 'Incorrect password. Please try again.';
-                passwordInput.value = '';
-                passwordInput.focus();
-                
-                // Shake animation for error
-                passwordInput.animate([
-                    { transform: 'translateX(0)' },
-                    { transform: 'translateX(-10px)' },
-                    { transform: 'translateX(10px)' },
-                    { transform: 'translateX(0)' }
-                ], {
-                    duration: 300
-                });
-            }
-        });
-        
-        // Cancel button
-        cancelBtn.addEventListener('click', function() {
-            passwordModal.style.display = 'none';
-        });
-        
-        // Press Enter to submit
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitBtn.click();
-            }
-        });
-        
-        // Close modal if clicked outside
-        passwordModal.addEventListener('click', function(e) {
-            if (e.target === passwordModal) {
-                passwordModal.style.display = 'none';
-            }
-        });
-
-        // Tab Navigation Functionality
-        function activateTab(tabId) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabId).classList.add('active');
-            
-            // Update active navigation links
-            document.querySelectorAll('.nav-item').forEach(link => {
-                link.classList.remove('active');
-                
-                const linkTarget = link.getAttribute('href').substring(1);
-                if (linkTarget === tabId) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Hide access granted section when switching tabs
-            accessGranted.style.display = 'none';
-        }
-
         // Navigation functionality
-        document.querySelectorAll('.nav-item').forEach(link => {
-            link.addEventListener('click', function(e) {
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.section');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Get target tab
-                const tabId = this.getAttribute('href').substring(1);
+                // Remove active class from all nav items
+                navItems.forEach(nav => nav.classList.remove('active'));
                 
-                // Activate the tab
-                activateTab(tabId);
+                // Add active class to clicked nav item
+                this.classList.add('active');
+                
+                // Get target section
+                const targetId = this.getAttribute('data-target');
+                
+                // Hide all sections
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Show target section
+                document.getElementById(targetId).classList.add('active');
             });
         });
-
-        // Form submission
-        document.getElementById('messageForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            
-            // Show confirmation
-            alert(`Thank you ${name}! Your message has been sent to ntentionalliving014@gmail.com. We'll respond within 24 hours.`);
-            
-            // Reset form
-            this.reset();
+        
+        // Floating Action Button functionality
+        const contactFab = document.getElementById('contactFab');
+        const contactMenu = document.getElementById('contactMenu');
+        
+        contactFab.addEventListener('click', function() {
+            contactMenu.classList.toggle('show');
         });
-
-        // Initialize with home tab active
-        activateTab('home');
+        
+        // Close contact menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!contactFab.contains(e.target) && !contactMenu.contains(e.target)) {
+                contactMenu.classList.remove('show');
+            }
+        });
+        
+        // Card tap effect
+        const cards = document.querySelectorAll('.card, .program-card');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.3)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+            });
+        });
+        
+        // Form submission
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            if (name) {
+                alert(`Thank you ${name}! Your message has been sent. We'll respond within 24 hours.`);
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please enter your name');
+            }
+        });
     </script>
 </body>
 </html>
