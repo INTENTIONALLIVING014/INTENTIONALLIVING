@@ -61,6 +61,13 @@
             gap: 8px;
         }
 
+        .connection-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+        }
+
         /* Header */
         .header {
             position: fixed;
@@ -420,18 +427,28 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Network connection status */
+        .connection-wifi { color: var(--bio-lum); }
+        .connection-4g { color: #7dffaf; }
+        .connection-3g { color: #ffcc00; }
+        .connection-2g { color: #ff6666; }
+        .connection-ethernet { color: var(--android-primary); }
+        .connection-offline { color: #ff6666; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Android Status Bar -->
+    <!-- Android Status Bar with real-time info -->
     <div class="status-bar">
         <div class="status-left">
-            <span>9:41</span>
+            <span id="current-time">9:41 AM</span>
         </div>
         <div class="status-right">
-            <i class="fas fa-signal"></i>
-            <i class="fas fa-wifi"></i>
+            <div class="connection-info" id="connection-info">
+                <i class="fas fa-wifi"></i>
+                <span id="connection-type">Wi-Fi</span>
+            </div>
             <i class="fas fa-battery-full"></i>
         </div>
     </div>
@@ -708,6 +725,76 @@
     </nav>
 
     <script>
+        // Real-time clock functionality
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = hours % 12 || 12;
+            
+            document.getElementById('current-time').textContent = `${formattedHours}:${minutes} ${ampm}`;
+        }
+        
+        // Initial time update
+        updateTime();
+        // Update time every minute
+        setInterval(updateTime, 60000);
+        
+        // Detect internet connection type
+        function detectConnectionType() {
+            const connectionInfo = document.getElementById('connection-info');
+            const connectionType = document.getElementById('connection-type');
+            const connectionIcon = connectionInfo.querySelector('i');
+            
+            // Clear previous classes
+            connectionIcon.className = '';
+            connectionInfo.classList.remove('connection-wifi', 'connection-4g', 'connection-3g', 
+                                           'connection-2g', 'connection-ethernet', 'connection-offline');
+            
+            // Simulate different connection types (in a real app, you would use the Network Information API)
+            const connectionTypes = ['Wi-Fi', '4G', '3G', '2G', 'Ethernet'];
+            const randomType = connectionTypes[Math.floor(Math.random() * connectionTypes.length)];
+            
+            // Set icon and text based on connection type
+            switch(randomType) {
+                case 'Wi-Fi':
+                    connectionIcon.className = 'fas fa-wifi';
+                    connectionType.textContent = 'Wi-Fi';
+                    connectionInfo.classList.add('connection-wifi');
+                    break;
+                case '4G':
+                    connectionIcon.className = 'fas fa-signal';
+                    connectionType.textContent = '4G';
+                    connectionInfo.classList.add('connection-4g');
+                    break;
+                case '3G':
+                    connectionIcon.className = 'fas fa-signal';
+                    connectionType.textContent = '3G';
+                    connectionInfo.classList.add('connection-3g');
+                    break;
+                case '2G':
+                    connectionIcon.className = 'fas fa-signal';
+                    connectionType.textContent = '2G';
+                    connectionInfo.classList.add('connection-2g');
+                    break;
+                case 'Ethernet':
+                    connectionIcon.className = 'fas fa-plug';
+                    connectionType.textContent = 'Ethernet';
+                    connectionInfo.classList.add('connection-ethernet');
+                    break;
+                default:
+                    connectionIcon.className = 'fas fa-signal-slash';
+                    connectionType.textContent = 'Offline';
+                    connectionInfo.classList.add('connection-offline');
+            }
+        }
+        
+        // Initial detection
+        detectConnectionType();
+        // Update every 20 seconds to simulate changing connections
+        setInterval(detectConnectionType, 20000);
+        
         // Navigation functionality
         const navItems = document.querySelectorAll('.nav-item');
         const sections = document.querySelectorAll('.section');
